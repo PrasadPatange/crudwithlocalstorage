@@ -1,0 +1,211 @@
+<div class="container">
+  <form
+  ngClass="{{mode=='add'? 'bg-body': 'bg-body-edit'}}"
+    class="shadow-lg p-3 mb-5 bg-body rounded"
+    name="form"
+    #userForm="ngForm"
+    (ngSubmit)="userForm.form.valid && onSubmit(userForm)"
+    novalidate
+  >
+    <div class="text-center">
+      <h2>{{ mode == "add" ? "Add" : "Edit" }} User</h2>
+    </div>
+    <br>
+    <div class="text-center">
+      <p class="alert alert-primary" *ngIf="submitted">{{userName | titlecase}} {{mode == 'add' ? "Added" : "Updated"}} Successfully!!!</p>
+    </div>
+    <div class="mb-3">
+      <input type="hidden" [(ngModel)]="form.id" id="id" name="id" />
+    </div>
+    <div class="mb-3">
+      <label for="first" class="form-label">First Name*</label>
+      <input
+        type="text"
+        class="form-control"
+        id="first"
+        #fname="ngModel"
+        maxlength="10"
+        minlength="3"
+        placeholder="Enter First Name"
+        name="fname"
+        [(ngModel)]="form.fname"
+        required
+      />
+      <div
+        *ngIf="fname.errors && (fname.dirty || fname.touched)"
+        class="text-danger"
+      >
+        <div *ngIf="fname.errors['required']">First Name is required*</div>
+        <div *ngIf="fname.errors['minlength']">
+          First Name must be at least 3 characters*
+        </div>
+        <div *ngIf="fname.errors['maxlength']">
+          First Name must be at most 10 characters*
+        </div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="last" class="form-label">Last Name*</label>
+      <input
+        type="text"
+        class="form-control"
+        id="last"
+        #lname="ngModel"
+        maxlength="10"
+        minlength="3"
+        placeholder="Enter Last Name"
+        [(ngModel)]="form.lname"
+        name="lname"
+        required
+      />
+
+      <div
+        *ngIf="lname.errors && (lname.dirty || lname.touched)"
+        class="text-danger"
+      >
+        <div *ngIf="lname.errors['required']">Last Name is required*</div>
+        <div *ngIf="lname.errors['minlength']">
+          Last Name must be at least 3 characters*
+        </div>
+        <div *ngIf="lname.errors['maxlength']">
+          Last Name must be at most 10 characters*
+        </div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label>Email*</label>
+      <input
+        type="email"
+        class="form-control"
+        name="email"
+        [(ngModel)]="form.email"
+        required
+        pattern="[^ @]*@[^ @]*"
+        #email="ngModel"
+        placeholder="Enter Email"
+      />
+      <div
+        *ngIf="email.errors && (email.dirty || email.touched)"
+        class="text-danger"
+      >
+        <div *ngIf="email.errors['required']">Email is required*</div>
+        <div *ngIf="email.errors['pattern']">Email pattern is invalid*</div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="designation" class="form-label">Designation*</label>
+
+      <select
+        class="form-control"
+        (change)="onChangeDesignation($event)"
+        [(ngModel)]="form.designation"
+        #desig="ngModel"
+        name="designation"
+        required
+      >
+        <option selected value="undefined" >--Select Designation--</option>
+        <option
+          *ngFor="let des of designation; let i = index"
+          value="{{ des }}"
+        >
+          {{ des }}
+        </option>
+      </select>
+      <div
+        *ngIf="desig.errors && (desig.dirty || desig.touched)"
+        class="text-danger"
+      >
+        <div *ngIf="desig.errors['required']">Designation is required*</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="mb-3 col-md-4">
+        <label>Select Country*</label>
+        <select
+          class="form-control"
+          (change)="onChangeCountry($event)"
+          [(ngModel)]="form.country"
+          name="country"
+          #country="ngModel"
+          required
+        >
+          <option selected value="undefined">--Select Country--</option>
+          <option
+            *ngFor="let country of countries; let i = index"
+            value="{{ i }}"
+          >
+            {{ country.CountryName }}
+          </option>
+        </select>
+        <div
+          *ngIf="country.errors && (country.dirty || country.touched)"
+          class="text-danger"
+        >
+          <div *ngIf="country.errors['required']">Country is required*</div>
+        </div>
+      </div>
+      <div class="mb-3 col-md-4">
+        <label>Select State*</label>
+        <select
+          class="form-control"
+          (change)="onChangeState($event)"
+          [(ngModel)]="form.state"
+          name="state"
+          #state="ngModel"
+          required
+        >
+          <option selected value="undefined">--Select State--</option>
+          <option
+            *ngFor="let state of stateInfo; let j = index"
+            value="{{ j }}"
+          >
+            {{ state.StateName }}
+          </option>
+        </select>
+        <div
+          *ngIf="state.errors && (state.dirty || state.touched)"
+          class="text-danger"
+        >
+          <div *ngIf="state.errors['required']">State is required*</div>
+        </div>
+      </div>
+      <div class="mb-3 col-md-4">
+        <label>Select City*</label>
+        <select
+          class="form-control"
+          (change)="onChangeCity($event)"
+          [(ngModel)]="form.city"
+          name="city"
+          #city="ngModel"
+          required
+        >
+          <option selected value="undefined">--Select City--</option>
+          <option *ngFor="let city of cityInfo; let k = index" value="{{ k }}">
+            {{ city }}
+          </option>
+        </select>
+        <div
+          *ngIf="city.errors && (city.dirty || city.touched)"
+          class="text-danger"
+        >
+          <div *ngIf="city.errors['required']">City is required*</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center">
+      <button
+        type="submit"
+        class="btn btn-{{mode == 'add' ? 'primary':'secondary'}}"
+        [disabled]="!userForm.form.valid"
+      >
+        {{ mode == "add" ? "Add" : "Edit" }} User
+      </button>
+    </div>
+  </form>
+</div>
+
+<pre>{{ userForm.value | json }}</pre>
+<!-- <pre>
+  {{countries | json}}
+</pre> -->
