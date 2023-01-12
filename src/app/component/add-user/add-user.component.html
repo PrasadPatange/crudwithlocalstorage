@@ -4,19 +4,29 @@
     class="shadow-lg p-3 mb-5 bg-body rounded"
     name="form"
     #userForm="ngForm"
-    (ngSubmit)="userForm.form.valid && onSubmit(userForm)"
+    (ngSubmit)="onSubmit(userForm)"
     novalidate
   >
+  <!--    (ngSubmit)="userForm.form.valid && onSubmit(userForm)" -->
+  <!-- Form Title -->
+
     <div class="text-center">
       <h2>{{ mode == "add" ? "Add" : "Edit" }} User</h2>
     </div>
     <br>
+
+    <!-- Success Message  -->
+
     <div class="text-center">
       <p class="alert alert-primary" *ngIf="submitted">{{userName | titlecase}} {{mode == 'add' ? "Added" : "Updated"}} Successfully!!!</p>
     </div>
+
+    <!-- Form -->
+
     <div class="mb-3">
       <input type="hidden" [(ngModel)]="form.id" id="id" name="id" />
     </div>
+
     <div class="mb-3">
       <label for="first" class="form-label">First Name*</label>
       <input
@@ -31,8 +41,12 @@
         [(ngModel)]="form.fname"
         required
       />
-      <div
+      <!-- <div
         *ngIf="fname.errors && (fname.dirty || fname.touched)"
+        class="text-danger"
+      > -->
+      <div
+        *ngIf="userForm.submitted && fname.errors "
         class="text-danger"
       >
         <div *ngIf="fname.errors['required']">First Name is required*</div>
@@ -44,6 +58,7 @@
         </div>
       </div>
     </div>
+
     <div class="mb-3">
       <label for="last" class="form-label">Last Name*</label>
       <input
@@ -60,7 +75,7 @@
       />
 
       <div
-        *ngIf="lname.errors && (lname.dirty || lname.touched)"
+        *ngIf="userForm.submitted && lname.errors"
         class="text-danger"
       >
         <div *ngIf="lname.errors['required']">Last Name is required*</div>
@@ -72,6 +87,7 @@
         </div>
       </div>
     </div>
+
     <div class="mb-3">
       <label>Email*</label>
       <input
@@ -85,13 +101,14 @@
         placeholder="Enter Email"
       />
       <div
-        *ngIf="email.errors && (email.dirty || email.touched)"
+        *ngIf="userForm.submitted && email.errors"
         class="text-danger"
       >
         <div *ngIf="email.errors['required']">Email is required*</div>
         <div *ngIf="email.errors['pattern']">Email pattern is invalid*</div>
       </div>
     </div>
+
     <div class="mb-3">
       <label for="designation" class="form-label">Designation*</label>
 
@@ -112,12 +129,13 @@
         </option>
       </select>
       <div
-        *ngIf="desig.errors && (desig.dirty || desig.touched)"
+        *ngIf="userForm.submitted && desig.errors"
         class="text-danger"
       >
         <div *ngIf="desig.errors['required']">Designation is required*</div>
       </div>
     </div>
+
     <div class="row">
       <div class="mb-3 col-md-4">
         <label>Select Country*</label>
@@ -138,7 +156,7 @@
           </option>
         </select>
         <div
-          *ngIf="country.errors && (country.dirty || country.touched)"
+          *ngIf="userForm.submitted && country.errors"
           class="text-danger"
         >
           <div *ngIf="country.errors['required']">Country is required*</div>
@@ -163,7 +181,7 @@
           </option>
         </select>
         <div
-          *ngIf="state.errors && (state.dirty || state.touched)"
+          *ngIf="userForm.submitted && state.errors"
           class="text-danger"
         >
           <div *ngIf="state.errors['required']">State is required*</div>
@@ -185,7 +203,7 @@
           </option>
         </select>
         <div
-          *ngIf="city.errors && (city.dirty || city.touched)"
+          *ngIf="userForm.submitted && city.errors"
           class="text-danger"
         >
           <div *ngIf="city.errors['required']">City is required*</div>
@@ -194,18 +212,28 @@
     </div>
 
     <div class="text-center">
-      <button
+      <!-- <button
         type="submit"
         class="btn btn-{{mode == 'add' ? 'primary':'secondary'}}"
         [disabled]="!userForm.form.valid"
       >
         {{ mode == "add" ? "Add" : "Edit" }} User
+
+      </button> -->
+      <button
+        type="submit"
+        class="btn btn-{{mode == 'add' ? 'primary':'secondary'}}"
+      
+      >
+        {{ mode == "add" ? "Add" : "Edit" }} User
+
       </button>
     </div>
   </form>
 </div>
-
+<!-- 
 <pre>{{ userForm.value | json }}</pre>
+<pre>{{ userForm.submitted | json }}</pre> -->
 <!-- <pre>
   {{countries | json}}
 </pre> -->

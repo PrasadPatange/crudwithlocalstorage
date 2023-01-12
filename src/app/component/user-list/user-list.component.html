@@ -8,6 +8,7 @@
     </div>
   </div>
   <br>
+  <div class="table-responsive-xl">
     <table class="table table-dark">
         <thead>
           <tr>
@@ -29,12 +30,15 @@
             <td>{{item.lname | titlecase}}</td>
             <td>{{item.email | titlecase}}</td>
             <td>{{item.designation}}</td>
-            <td>{{item.country}}</td>
-            <td>{{item.state}}</td>
-            <td>{{item.city}}</td>
-            <td><button class="btn btn-sm btn-secondary" [routerLink]="['/addUser',item.id]" >Update</button> &nbsp;<button class="btn btn-sm btn-danger" (click)="deleteUser(item)">Delete</button></td>
+            <td>{{country[item.country]?.CountryName}}</td>
+            <td>{{country[item.country]?.States[item.state]?.StateName}}</td>
+            <td>{{country[item.country]?.States[item.state]?.Cities[item.city]}}</td>
+            <td><button class="btn btn-sm btn-secondary" [routerLink]="['/addUser',item.id]" >Update</button> &nbsp;<button class="btn btn-sm btn-danger" (click)="deleteUser(item,i)">Delete</button></td>
           </tr>
         </tbody>
       </table>
+  </div>
 </div>
-<!-- (click)="updateUser(item)" -->
+<!-- <pre>
+  {{country | json}}
+</pre> -->
