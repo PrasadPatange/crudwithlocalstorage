@@ -155,7 +155,7 @@ export class AddUserComponent implements OnInit {
       }, 3000);
 
     }else{
-      alert("All fields are Required and Please Enter Valid User Information");
+      alert(" Please Enter Valid User Information. ( NOTE : All fields are Mandatory. )");
     }
   }
 }

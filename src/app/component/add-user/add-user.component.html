@@ -11,14 +11,14 @@
   <!-- Form Title -->
 
     <div class="text-center">
-      <h2>{{ mode == "add" ? "Add" : "Edit" }} User</h2>
+      <h2>{{ mode == "add" ? "Add" : "Edit" }} User <i class="bi  {{ mode == 'add' ? 'bi-person-plus-fill' : 'bi-pencil-square' }}"></i></h2>
     </div>
     <br>
 
     <!-- Success Message  -->
 
     <div class="text-center">
-      <p class="alert alert-primary" *ngIf="submitted">{{userName | titlecase}} {{mode == 'add' ? "Added" : "Updated"}} Successfully!!!</p>
+      <p class="alert alert-primary" *ngIf="submitted">{{userName | titlecase}} {{mode == 'add' ? "Added" : "Updated"}} Successfully!!! <i class="bi bi-check2-circle"></i></p>
     </div>
 
     <!-- Form -->
@@ -41,10 +41,6 @@
         [(ngModel)]="form.fname"
         required
       />
-      <!-- <div
-        *ngIf="fname.errors && (fname.dirty || fname.touched)"
-        class="text-danger"
-      > -->
       <div
         *ngIf="userForm.submitted && fname.errors "
         class="text-danger"
@@ -120,7 +116,7 @@
         name="designation"
         required
       >
-        <option selected value="undefined" >--Select Designation--</option>
+        <option selected  disabled value="undefined" >--Select Designation--</option>
         <option
           *ngFor="let des of designation; let i = index"
           value="{{ des }}"

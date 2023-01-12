@@ -1,10 +1,10 @@
 <div class="container">
   <div class="row">
     <div class="mt-3 col-md-6">
-      <a class="btn btn-primary" aria-current="page" (click)="resetForm()" routerLink="/addUser">Add User</a>
+      <a class="btn btn-primary" aria-current="page" (click)="resetForm()" routerLink="/addUser"><i class="bi bi-person-plus-fill"></i> Add User</a>
     </div>
     <div class="text-center col-md-6">
-      <p class="alert alert-danger" *ngIf="deleted">{{deletedUser | titlecase}} Deleted Successfully!!!</p>
+      <p class="alert alert-danger" *ngIf="deleted">{{deletedUser | titlecase}} Deleted Successfully!!! <i class="bi bi-check2-circle"></i></p>
     </div>
   </div>
   <br>
@@ -33,7 +33,7 @@
             <td>{{country[item.country]?.CountryName}}</td>
             <td>{{country[item.country]?.States[item.state]?.StateName}}</td>
             <td>{{country[item.country]?.States[item.state]?.Cities[item.city]}}</td>
-            <td><button class="btn btn-sm btn-secondary" [routerLink]="['/addUser',item.id]" >Update</button> &nbsp;<button class="btn btn-sm btn-danger" (click)="deleteUser(item,i)">Delete</button></td>
+            <td><button class="btn btn-sm btn-secondary" [routerLink]="['/addUser',item.id]" ><i class="bi bi-pencil-fill"></i></button> &nbsp;&nbsp;<button class="btn btn-sm btn-danger" (click)="deleteUser(item,i)"><i class="bi bi-person-dash-fill"></i></button></td>
           </tr>
         </tbody>
       </table>
