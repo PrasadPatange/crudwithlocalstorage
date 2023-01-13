@@ -29,27 +29,28 @@
 
     <div class="mb-3">
       <label for="first" class="form-label">First Name*</label>
+     
       <input
         type="text"
         class="form-control"
         id="first"
         #fname="ngModel"
-        maxlength="10"
-        minlength="3"
         placeholder="Enter First Name"
         name="fname"
         [(ngModel)]="form.fname"
-        required
+        NameMinLengthValidator
+        NameMaxLengthValidator
+        RequiredValidator
       />
       <div
         *ngIf="userForm.submitted && fname.errors "
         class="text-danger"
       >
-        <div *ngIf="fname.errors['required']">First Name is required*</div>
-        <div *ngIf="fname.errors['minlength']">
+        <div *ngIf="fname.errors['requiredField']">First Name is required*</div>
+        <div *ngIf="fname.errors['minlengthvalidation']">
           First Name must be at least 3 characters*
         </div>
-        <div *ngIf="fname.errors['maxlength']">
+        <div *ngIf="fname.errors['maxlengthvalidation']">
           First Name must be at most 10 characters*
         </div>
       </div>
@@ -62,28 +63,28 @@
         class="form-control"
         id="last"
         #lname="ngModel"
-        maxlength="10"
-        minlength="3"
         placeholder="Enter Last Name"
         [(ngModel)]="form.lname"
         name="lname"
-        required
+        NameMinLengthValidator
+        NameMaxLengthValidator
+        RequiredValidator
       />
 
       <div
         *ngIf="userForm.submitted && lname.errors"
         class="text-danger"
       >
-        <div *ngIf="lname.errors['required']">Last Name is required*</div>
-        <div *ngIf="lname.errors['minlength']">
+        <div *ngIf="lname.errors['requiredField']">Last Name is required*</div>
+        <div *ngIf="lname.errors['minlengthvalidation']">
           Last Name must be at least 3 characters*
         </div>
-        <div *ngIf="lname.errors['maxlength']">
+        <div *ngIf="lname.errors['maxlengthvalidation']">
           Last Name must be at most 10 characters*
         </div>
       </div>
     </div>
-
+     
     <div class="mb-3">
       <label>Email*</label>
       <input
@@ -91,17 +92,60 @@
         class="form-control"
         name="email"
         [(ngModel)]="form.email"
-        required
-        pattern="[^ @]*@[^ @]*"
         #email="ngModel"
         placeholder="Enter Email"
-      />
-      <div
+        EmailValidator
+        RequiredValidator
+        />
+        <div
         *ngIf="userForm.submitted && email.errors"
         class="text-danger"
       >
-        <div *ngIf="email.errors['required']">Email is required*</div>
-        <div *ngIf="email.errors['pattern']">Email pattern is invalid*</div>
+        <div *ngIf="email.errors['requiredField']">Email is required*</div>
+        <div *ngIf="email.errors['emailValidation']">Email pattern is Invalid*</div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label>Phone Number*</label>
+      <input
+        type="phone"
+        class="form-control"
+        name="phone"
+        [(ngModel)]="form.phone"
+        #phone="ngModel"
+        placeholder="Enter Phone Number"
+        PhoneValidator
+        RequiredValidator
+        />
+        <div
+        *ngIf="userForm.submitted && phone.errors"
+        class="text-danger"
+      >
+        <div *ngIf="phone.errors['requiredField']">Phone Number is required*</div>
+        <div *ngIf="phone.errors['phoneValidation']">Please Enter Valid Phone Number (10 Digit Only)*</div>
+      </div>
+    </div>
+    
+
+    <div class="mb-3">
+      <label>Annual Salary (CTC In LPA)*</label>
+      <input
+        type="text"
+        class="form-control"
+        name="salary"
+        [(ngModel)]="form.salary"
+        #salary="ngModel"
+        placeholder="Enter Salary In LPA"
+        SalaryValidator
+        RequiredValidator
+        />
+        <div
+        *ngIf="userForm.submitted && salary.errors"
+        class="text-danger"
+      >
+        <div *ngIf="salary.errors['requiredField']">Salary is required*</div>
+        <div *ngIf="salary.errors['salaryValidation']">Please Enter Valid Salary*</div>
       </div>
     </div>
 
@@ -114,7 +158,7 @@
         [(ngModel)]="form.designation"
         #desig="ngModel"
         name="designation"
-        required
+        RequiredValidator
       >
         <option selected  disabled value="undefined" >--Select Designation--</option>
         <option
@@ -128,7 +172,7 @@
         *ngIf="userForm.submitted && desig.errors"
         class="text-danger"
       >
-        <div *ngIf="desig.errors['required']">Designation is required*</div>
+        <div *ngIf="desig.errors['requiredField']">Designation is required*</div>
       </div>
     </div>
 
@@ -141,7 +185,7 @@
           [(ngModel)]="form.country"
           name="country"
           #country="ngModel"
-          required
+          RequiredValidator
         >
           <option selected value="undefined">--Select Country--</option>
           <option
@@ -155,7 +199,7 @@
           *ngIf="userForm.submitted && country.errors"
           class="text-danger"
         >
-          <div *ngIf="country.errors['required']">Country is required*</div>
+          <div *ngIf="country.errors['requiredField']">Country is required*</div>
         </div>
       </div>
       <div class="mb-3 col-md-4">
@@ -166,7 +210,7 @@
           [(ngModel)]="form.state"
           name="state"
           #state="ngModel"
-          required
+          RequiredValidator
         >
           <option selected value="undefined">--Select State--</option>
           <option
@@ -180,7 +224,7 @@
           *ngIf="userForm.submitted && state.errors"
           class="text-danger"
         >
-          <div *ngIf="state.errors['required']">State is required*</div>
+          <div *ngIf="state.errors['requiredField']">State is required*</div>
         </div>
       </div>
       <div class="mb-3 col-md-4">
@@ -191,7 +235,7 @@
           [(ngModel)]="form.city"
           name="city"
           #city="ngModel"
-          required
+          RequiredValidator
         >
           <option selected value="undefined">--Select City--</option>
           <option *ngFor="let city of cityInfo; let k = index" value="{{ k }}">
@@ -202,7 +246,7 @@
           *ngIf="userForm.submitted && city.errors"
           class="text-danger"
         >
-          <div *ngIf="city.errors['required']">City is required*</div>
+          <div *ngIf="city.errors['requiredField']">City is required*</div>
         </div>
       </div>
     </div>

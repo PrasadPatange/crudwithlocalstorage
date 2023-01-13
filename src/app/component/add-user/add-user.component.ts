@@ -18,6 +18,8 @@ export class AddUserComponent implements OnInit {
     fname: '',
     lname: '',
     email: '',
+    phone:'',
+    salary:0,
     designation: '',
     country: '',
     state: '',
@@ -76,6 +78,8 @@ export class AddUserComponent implements OnInit {
       fname:this.userData.fname,
       lname:this.userData.lname,
       email:this.userData.email,
+      phone:this.userData.phone,
+      salary:this.userData.salary,
       designation: this.userData.designation,
       country: this.userData.country,
       state: this.userData.state,
@@ -155,7 +159,7 @@ export class AddUserComponent implements OnInit {
       }, 3000);
 
     }else{
-      alert(" Please Enter Valid User Information. ( NOTE : All fields are Mandatory. )");
+      // alert(" Please Enter Valid User Information. ( NOTE : All fields are Mandatory. )");
     }
   }
 }

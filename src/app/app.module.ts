@@ -8,13 +8,25 @@ import { UserListComponent } from './component/user-list/user-list.component';
 import { NavbarComponent } from './component/navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { NameMinLengthDirective } from './Directives/name-min-length.directive';
+import { NameMaxLengthDirective } from './Directives/name-max-length.directive';
+import { EmailValidatorDirective } from './Directives/email-validator.directive';
+import { RequiredValidatorDirective } from './Directives/required-validator.directive';
+import { PhoneValidationDirective } from './Directives/phone-validation.directive';
+import { SalaryValidationDirective } from './Directives/salary-validation.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddUserComponent,
     UserListComponent,
-    NavbarComponent
+    NavbarComponent,
+    NameMinLengthDirective,
+    NameMaxLengthDirective,
+    EmailValidatorDirective,
+    RequiredValidatorDirective,
+    PhoneValidationDirective,
+    SalaryValidationDirective
   ],
   imports: [
     BrowserModule,
