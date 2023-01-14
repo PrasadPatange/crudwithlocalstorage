@@ -85,7 +85,21 @@
       </div>
     </div>
      
+    
     <div class="mb-3">
+      <!-- pass Input parameter to email directive (EmailValidator) to disabled validation  [emailnotvalid]="email1"-->
+      <!-- <label>Email*</label>
+      <input
+        type="email"
+        class="form-control"
+        name="email"
+        [(ngModel)]="form.email"
+        #email="ngModel"
+        placeholder="Enter Email"
+        EmailValidator
+        [emailnotvalid]="email1"
+        RequiredValidator
+        /> -->
       <label>Email*</label>
       <input
         type="email"

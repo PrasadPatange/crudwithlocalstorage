@@ -13,6 +13,9 @@ import { v4 as uuidv4 } from 'uuid';
 })
 export class AddUserComponent implements OnInit {
 
+
+   email1 = "notvalidate";
+
    form:User = {
     id:'',
     fname: '',
