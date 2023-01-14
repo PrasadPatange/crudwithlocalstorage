@@ -52,6 +52,12 @@ export class AddUserComponent implements OnInit {
   public submitted:boolean = false;
   public userName : any;
 
+  countryID:any;
+  stateID:any;
+  StateKey:any = "State";
+  CityKey:any = "City";
+
+
   constructor(
     public countryUrl: CountriesService,
     public apiService: ApiService,
@@ -74,8 +80,20 @@ export class AddUserComponent implements OnInit {
         this.mode = 'edit';
       }
     });
+   
+    
+    this.setUserData();
+
+    this.getCountries();
+
+  }
+
+  public setUserData(){
     this.userData = JSON.parse(localStorage.getItem('singleUser') || '{}');
     //  console.log("Single User : ",this.userData);
+    // this.onChangeCountry(this.userData.country);
+    // this.onChangeState(this.userData.state);
+    
     this.form = {
       id:this.userData.id,
       fname:this.userData.fname,
@@ -88,9 +106,6 @@ export class AddUserComponent implements OnInit {
       state: this.userData.state,
       city: this.userData.city,
     }
-    
-    this.getCountries();
-
   }
 
   public getCountries() : void {
@@ -102,6 +117,12 @@ export class AddUserComponent implements OnInit {
           this.countries = data.Countries;
           this.stateInfo = this.countries[this.userData.country].States;
           this.cityInfo = this.stateInfo[this.userData.state].Cities;
+         
+         
+          // this.stateInfo = this.countries[this.userData.country];
+          // this.cityInfo = this.stateInfo[this.userData.state];
+          console.log("country number : ",this.userData.country, "stateInfo : ", this.stateInfo);
+          console.log("state number : ",this.userData.state , "cityInfo : ", this.cityInfo);
         }
 
         // console.log("stateInfo: ",this.stateInfo);
@@ -121,10 +142,22 @@ export class AddUserComponent implements OnInit {
 
   
   public onChangeDesignation(desValue: any) : void {
-    console.log(desValue.target.value);
+    // console.log(desValue.target.value);
   }
+
   public onChangeCountry(countryValue: any) : void{
-    this.stateInfo = this.countries[countryValue.target.value].States;
+
+    this.countryID = countryValue.target.value;
+    console.log("Country ID : ",this.countryID);
+
+    this.stateInfo = this.countries;
+    console.log("States : ", this.stateInfo);
+    
+    // this.stateInfo = this.countries[countryValue.target.value].States;
+
+    // this.stateInfo = this.countries[countryValue.target.value];
+
+
     // console.log("coutry name : ",this.form.country);
     // console.log(" States : ",this.countries[countryValue.target.value].States);
 
@@ -133,9 +166,20 @@ export class AddUserComponent implements OnInit {
 
   public onChangeState(stateValue: any) : void {
     
-    this.cityInfo = this.stateInfo[stateValue.target.value].Cities;
+    this.stateID = stateValue.target.value;
+    console.log("State ID : ",this.stateID);
+
+    this.cityInfo =  this.countries;
+    console.log("City user ts: ",this.cityInfo);
+
+
+    // this.cityInfo = this.stateInfo[stateValue.target.value].Cities;
+    
+    // this.cityInfo = this.stateInfo[stateValue.target.value];
 
     // console.log("city : ",this.cityInfo);
+
+   
   }
   public onChangeCity(cityValue: any) : void {
     // console.log(" States name : ", this.stateInfo[stateValue.target.value].StateName);

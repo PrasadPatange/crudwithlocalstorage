@@ -14,6 +14,7 @@ import { EmailValidatorDirective } from './Directives/email-validator.directive'
 import { RequiredValidatorDirective } from './Directives/required-validator.directive';
 import { PhoneValidationDirective } from './Directives/phone-validation.directive';
 import { SalaryValidationDirective } from './Directives/salary-validation.directive';
+import { FilterDataPipe } from './Pipes/filter-data.pipe';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { SalaryValidationDirective } from './Directives/salary-validation.direct
     EmailValidatorDirective,
     RequiredValidatorDirective,
     PhoneValidationDirective,
-    SalaryValidationDirective
+    SalaryValidationDirective,
+    FilterDataPipe
   ],
   imports: [
     BrowserModule,

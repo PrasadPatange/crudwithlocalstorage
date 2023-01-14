@@ -203,7 +203,7 @@
         >
           <option selected value="undefined">--Select Country--</option>
           <option
-            *ngFor="let country of countries; let i = index"
+            *ngFor="let country of countries ; let i = index"
             value="{{ i }}"
           >
             {{ country.CountryName }}
@@ -227,13 +227,15 @@
           RequiredValidator
         >
           <option selected value="undefined">--Select State--</option>
+          
           <option
-            *ngFor="let state of stateInfo; let j = index"
-            value="{{ j }}"
+          *ngFor="let state of stateInfo | filterData:countryID:stateID:StateKey; let j = index"
+          value="{{ j }}"
           >
-            {{ state.StateName }}
+          {{ state.StateName }}
           </option>
-        </select>
+         
+      </select>
         <div
           *ngIf="userForm.submitted && state.errors"
           class="text-danger"
@@ -252,9 +254,14 @@
           RequiredValidator
         >
           <option selected value="undefined">--Select City--</option>
-          <option *ngFor="let city of cityInfo; let k = index" value="{{ k }}">
+          <option *ngFor="let city of cityInfo | filterData:countryID:stateID:CityKey; let k = index" value="{{ k }}">
+            <!-- {{  city.StateName }} -->
             {{ city }}
+            <!-- | filterData:countryID:CityKey -->
           </option>
+          <!-- <option *ngFor="let city of cityInfo; let k = index" value="{{ k }}">
+            {{ city }}
+          </option> -->
         </select>
         <div
           *ngIf="userForm.submitted && city.errors"
